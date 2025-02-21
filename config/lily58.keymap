@@ -10,67 +10,72 @@
 #include <dt-bindings/zmk/keys.h>
 
 / {
-    combos {
-        compatible = "zmk,combos";
-
-        thumb_del {
-            bindings = <&kp DEL>;
-            key-positions = <53 54>;
-        };
-    };
 
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
             // ------------------------------------------------------------------------------------------------------------
-            // |  ESC   |  1  |  2  |  3   |  4   |  5   |                    |  6   |  7    |  8    |  9   |   0   |   -   |
-            // |  ~     |  Q  |  W  |  E   |  R   |  T   |                    |  Y   |  U    |  I    |  O   |   P   |   +   |
+            // |        |     |     |      |      |      |                    |      |       |       |      |       |       |
+            // |  ~     |  Q  |  W  |  E   |  R   |  T   |                    |  Y   |  U    |  I    |  O   |   P   |  BSP  |
             // |  TAB   |  A  |  S  |  D   |  F   |  G   |                    |  H   |  J    |  K    |  L   |   ;   |   '   |
-            // |  CTRL  |  Z  |  X  |  C   |  V   |  B   |   "["  |  |  "]"   |  N   |  M    |  ,    |  .   |   /   | "|"   |
-            //                     | ALT  | GUI  | LSHFT|  SPACE/L || ENTER/R | DEL | BSPC  | GUI   |
+            // |  SHIFT |  Z  |  X  |  C   |  V   |  B   |   "["  |  |  "]"   |  N   |  M    |  ,    |  .   |   /   | "|"   |
+            //                      |      | GUI  | SPACE|  TAB/L || BSPC/R | RET | RCTRL  | GUI   |
 
             bindings = <
-&kp ESC    &kp N1  &kp N2  &kp N3    &kp N4    &kp N5                               &kp N6  &kp N7      &kp N8     &kp N9   &kp N0    &kp MINUS
-&kp TILDE  &kp Q   &kp W   &kp E     &kp R     &kp T                                &kp Y   &kp U       &kp I      &kp O    &kp P     &kp KP_PLUS
+&trans     &trans  &trans  &trans    &trans    &trans                               &trans  &trans      &trans     &trans   &trans    &trans 
+&kp TILDE  &kp Q   &kp W   &kp E     &kp R     &kp T                                &kp Y   &kp U       &kp I      &kp O    &kp P     &kp BSPC
 &kp TAB    &kp A   &kp S   &kp D     &kp F     &kp G                                &kp H   &kp J       &kp K      &kp L    &kp SEMI  &kp SQT
-&kp LCTRL  &kp Z   &kp X   &kp C     &kp V     &kp B      &kp LBKT       &kp RBKT   &kp N   &kp M       &kp COMMA  &kp DOT  &kp FSLH  &kp PIPE
-                           &kp LALT  &kp LGUI  &kp LSHFT  &lt 1 SPACE    &lt 2 RET  &mo 2   &kp DELETE  &kp BSPC
+&kp LSHIFT  &kp Z   &kp X   &kp C     &kp V     &kp B      &kp LBKT       &kp RBKT   &kp N   &kp M       &kp COMMA  &kp DOT  &kp FSLH  &kp PIPE
+                           &trans  &kp LGUI  &kp SPACE  &lt 1 TAB  &lt 2 BSPC  &kp RET  &kp RCTRL &trans
             >;
         };
 
         lower_layer {
             // ------------------------------------------------------------------------------------------------------------
-            // |  F1   |  F2  |  F3 |  F4  |  F5  |  F6  |                   |  F7  |  F8   |  F9   |  F10 |  F11  |  F12  |
-            // |   `   |BTCLR | BT1 | BT2 |  BT3 |  BT4  |                   |      |       |       |      |       |       |
-            // |       |  !   |  @  |  #   |  $   |  %   |                   |  ^   |  &    |  *    |  (   |   )   |   ~   |
-            // |       |      |     |      |      |      |        |  |       |      |  _    |  +    |  {   |   }   |  "|"  |
-            //                      |      |      |      |        |  |       |      |       |       |
-
-            bindings = <
-&kp F1     &kp F2            &kp F3             &kp F4             &kp F5        &kp F6                          &kp F7     &kp F8     &kp F9           &kp F10   &kp F11   &kp F12
-&kp GRAVE  &bt BT_CLR        &bt BT_SEL 0       &bt BT_SEL 1       &bt BT_SEL 2  &bt BT_SEL 3                    &trans     &trans     &trans           &trans    &trans    &trans
-&trans     &kp EXCL          &kp AT             &kp HASH           &kp DOLLAR    &kp PRCNT                       &kp CARET  &kp AMPS   &kp KP_MULTIPLY  &kp LPAR  &kp RPAR  &kp TILDE
-&trans     &ext_power EP_ON  &ext_power EP_OFF  &ext_power EP_TOG  &trans        &trans        &trans    &trans  &trans     &kp MINUS  &kp KP_PLUS      &kp LBRC  &kp RBRC  &kp PIPE
-                                                &kp PAGE_DOWN      &trans        &trans        &trans    &trans  &trans     &trans     &kp PG_UP
-            >;
-        };
-
-        raise_layer {
-            // ------------------------------------------------------------------------------------------------------------
             // |       |     |     |      |      |      |                   |      |       |       |      |       |       |
-            // |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |   7   |   8   |  9   |   0   |       |
-            // |   F1  |  F2 |  F3 |  F4  |  F5  |  F6  |                   |  <-  |   v   |  ^    |  ->  |       |       |
-            // |   F7  |  F8 |  F9 |  F10 |  F11 |  F12 |        |  |       |  +   |   -   |   =   |  [   |   ]   |   \   |
+            // |  ESC  |  !  |  @  |  #   |  $   |  %   |                   |  ^   |   &   |   *   |  (   |   )   |       |
+            // |       |  1  |  2  |  3   |  4   |  5   |                   |  6   |   7   |   8   |  9   |   0   |       |
+            // |   |   |  ~  |  /  |  <   |  [   |  {   |        |  |       |  }   |   ]   |   >   |  \   |   `   |   |   |
             //                     |      |      |      |        |  |       |      |       |       |
 
             bindings = <
 &trans     &trans  &trans  &trans         &trans   &trans                     &trans       &trans     &trans       &trans     &trans    &trans
-&kp GRAVE  &kp N1  &kp N2  &kp N3         &kp N4   &kp N5                     &kp N6       &kp N7     &kp N8       &kp N9     &kp N0    &trans
-&kp F1     &kp F2  &kp F3  &kp F4         &kp F5   &kp F6                     &kp LEFT     &kp DOWN   &kp UP       &kp RIGHT  &trans    &trans
-&kp F7     &kp F8  &kp F9  &kp F10        &kp F11  &kp F12  &trans    &trans  &kp KP_PLUS  &kp MINUS  &kp EQUAL    &kp LBKT   &kp RBKT  &kp BSLH
-                           &kp PAGE_DOWN  &trans   &trans   &trans    &trans  &trans       &trans     &kp PAGE_UP
+&kp ESC    &kp EXCL &kp AT &kp HASH       &kp DOLLAR  &kp PRCNT               &kp CARET  &kp AMPS   &kp KP_MULTIPLY  &kp LPAR  &kp RPAR &trans
+&trans     &kp N1  &kp N2  &kp N3         &kp N4   &kp N5                     &kp N6       &kp N7     &kp N8       &kp N9     &kp N0    &trans
+&kp PIPE   &kp TILDE &kp FSLH &kp LT      &kp LBKT &kp LBRC     &trans &trans  &kp RBRC &kp RBKT &kp GT   &kp BSLH &kp GRAVE &kp PIPE
+                           &trans  &trans   &trans   &trans    &trans  &trans       &trans     &trans
             >;
+        };
+    
+        raise_layer {
+            // ------------------------------------------------------------------------------------------------------------
+            // |       |      |     |     |      |      |                   |      |      |      |      |      |      |
+            // |   `   |  DEL  |     |  _  |  +  | PGUP |                   |      |      |      |      |      |      |
+            // |       | HOME | END |  -  |  =   | PGDN |                   | LEFT | DOWN |  UP  | RIGHT| MENU |      |
+            // |       | BTCLR | BT0 | BT1 | BT2 | BT3  |        |  |       | PLAY | PREV | NEXT | VOL- | VOL+ |      |
+            //                      |     |      |      |        |  |       |      |      |      |
+
+
+            bindings = <
+&trans     &trans  &trans  &trans         &trans   &trans                     &trans       &trans     &trans       &trans     &trans    &trans
+&kp GRAVE  &kp DELETE &trans &kp UNDERSCORE  &kp PLUS  &kp PG_UP                        &trans     &trans     &trans         &trans    &trans    &trans
+&trans     &kp HOME    &kp END     &kp MINUS  &kp EQUAL  &kp PG_DN                      &kp LEFT     &kp DOWN   &kp UP       &kp RIGHT  &trans    &trans
+&trans     &bt BT_CLR  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3    &trans  &trans      &kp C_PLAY_PAUSE  &kp C_PREV  &kp C_NEXT  &kp C_VOL_DN &kp C_VOL_UP &trans
+                            &trans  &trans   &trans   &trans    &trans  &trans       &trans     &trans
+            >;
+        };    
+
+        extra_1 {
+            status = "reserved";
+        };
+
+        extra_2 {
+            status = "reserved";
+        };
+
+        extra_3 {
+            status = "reserved";
         };
     };
 };
