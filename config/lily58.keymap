@@ -7,7 +7,6 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/pointing.h>
 
 / {
         behaviors {
@@ -28,12 +27,6 @@
                         bindings = <&kp FSLH>, <&kp BSLH>;
                 };
 
-                td_shift_mouse: tap_dance_shift_mouse {
-                        compatible = "zmk,behavior-tap-dance";
-                        #binding-cells = <0>;
-                        tapping-term-ms = <200>;
-                        bindings = <&kp LSHIFT>, <&tog 3>;
-                };
         };
 
         keymap {
@@ -45,14 +38,14 @@
 // |  ESC |  Q   |  W   |  E   |  R   |  T   |                  |  Y   |  U   |  I   |  O   |  P   |  =   |
 // |  GUI |  A   |  S   |  D   |  F   |  G   |                  |  H   |  J   |  K   |  L   |  ;   |  '   |
 // |  CTL |  Z   |  X   |  C   |  V   |  B   |      |  |        |  N   |  M   |  ,   |  .   | //\  |  -   |
-//                      |      |SHIFT/MOUSE| ENTER | TAB/L |  | BSPC/R | SPACE | SHIFT |      |
+//                      |      | SHIFT | ENTER | TAB/L |  | BSPC/R | SPACE | SHIFT |      |
                         display-name = "Base";
                         bindings = <
    &none     &none &none &none &none &none                       &none &none &none     &none   &none     &none
    &kp ESC   &kp Q &kp W &kp E &kp R &kp T                       &kp Y &kp U &kp I     &kp O   &kp P     &kp EQUAL
    &kp LGUI  &kp A &kp S &kp D &kp F &kp G                       &kp H &kp J &kp K     &kp L   &kp SEMI  &kp SQT
    &kp LCTRL &kp Z &kp X &kp C &kp V &kp B  &none        &none   &kp N &kp M &kp COMMA &kp DOT &td_slash &kp MINUS
-                   &none &td_shift_mouse &kp ENTER &lt 1 TAB     &lt 2 BSPC &kp SPACE &kp RSHIFT &none
+                   &none &kp LSHIFT &kp ENTER &lt 1 TAB          &lt 2 BSPC &kp SPACE &kp RSHIFT &none
                         >;
                 };
 
@@ -90,21 +83,8 @@
                         >;
                 };
 
-                mouse_layer {
-// -----------------------------------------------------------------------------------------
-// |      |      |      |      |      |      |                  |      |      |      |      |      |      |
-// |      |      |      |      |      |      |                  |      |      |      |      |      |      |
-// |      |      |      |      |      |      |                  |  H/← |  J/↓ |  K/↑ |  L/→ |      |      |
-// |      |      |      |      |      |      |      |  |        |      |      |      |      |      |      |
-//                      |      |      |      | TAB/LCLK |  | BSPC/RCLK |      |      |      |
-                        display-name = "Mouse";
-                        bindings = <
-   &none  &none  &none  &none  &none  &none                       &none          &none          &none        &none           &none  &none
-   &trans &trans &trans &trans &trans &trans                      &trans         &trans         &trans       &trans          &trans &trans
-   &trans &trans &trans &trans &trans &trans                      &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP &mmv MOVE_RIGHT &trans &trans
-   &trans &trans &trans &trans &trans &trans &none        &none   &trans         &trans         &trans       &trans          &trans &trans
-                        &none  &trans &trans &mkp LCLK            &mkp RCLK      &trans         &trans       &none
-                        >;
+                extra_1 {
+                        status = "reserved";
                 };
 
                 extra_2 {
